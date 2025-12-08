@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.web.mapper.RecipeMapper">
+  <select id="recipeListData" resultType="com.sist.web.vo.RecipeVO" parameterType="hashmap">
+    SELECT no,title,chef,poster,num
+    FROM (SELECT no,title,chef,poster,rownum as num
+    FROM (SELECT no,title,chef,poster
+    FROM recipe 
+    WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)
+    ORDER BY no ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+</mapper>
