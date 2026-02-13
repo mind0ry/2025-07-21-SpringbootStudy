@@ -18,6 +18,11 @@ spring:
     suffix: .html
     mode: HTML
 
+  ai:
+    google:
+      genai:
+        api-key:
+
 logging:
     level:
       org.hibernate.SQL: DEBUG
